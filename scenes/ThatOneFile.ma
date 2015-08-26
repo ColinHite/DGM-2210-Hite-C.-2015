@@ -1,6 +1,6 @@
 //Maya ASCII 2016 scene
 //Name: ThatOneFile.ma
-//Last modified: Wed, Aug 26, 2015 02:57:17 PM
+//Last modified: Wed, Aug 26, 2015 02:58:46 PM
 //Codeset: 1252
 requires maya "2016";
 requires -nodeType "mentalrayFramebuffer" -nodeType "mentalrayOptions" -nodeType "mentalrayGlobals"
@@ -159,6 +159,23 @@ createNode nurbsSurface -n "backnurbsCubeShape1" -p "backnurbsCube1";
 	setAttr ".dvv" 0;
 	setAttr ".cpr" 4;
 	setAttr ".cps" 4;
+createNode transform -n "nurbsSphere1";
+	rename -uid "E2E4B49E-4540-4675-FA2D-D3923E0476AA";
+	setAttr ".t" -type "double3" 3 0 0 ;
+createNode nurbsSurface -n "nurbsSphereShape1" -p "nurbsSphere1";
+	rename -uid "720462AE-46E6-30A2-F6E1-DE878960883E";
+	setAttr -k off ".v";
+	setAttr ".vir" yes;
+	setAttr ".vif" yes;
+	setAttr ".tw" yes;
+	setAttr ".covm[0]"  0 1 1;
+	setAttr ".cdvm[0]"  0 1 1;
+	setAttr ".dvu" 0;
+	setAttr ".dvv" 0;
+	setAttr ".cpr" 4;
+	setAttr ".cps" 4;
+	setAttr ".nufa" 4.5;
+	setAttr ".nvfa" 4.5;
 createNode lightLinker -s -n "lightLinker1";
 	rename -uid "8B793854-4F47-929B-11A2-BD9CD191698B";
 	setAttr -s 2 ".lnk";
@@ -501,6 +518,9 @@ createNode script -n "sceneConfigurationScriptNode";
 createNode makeNurbCube -n "makeNurbCube1";
 	rename -uid "7CF1DFCC-4605-7793-1B2A-62BEAC3BF3F2";
 	setAttr ".ax" -type "double3" 0 1 0 ;
+createNode makeNurbSphere -n "makeNurbSphere1";
+	rename -uid "4AA66669-4B45-7E4E-7C17-2ABB271C4E30";
+	setAttr ".ax" -type "double3" 0 1 0 ;
 select -ne :time1;
 	setAttr ".o" 1;
 	setAttr ".unw" 1;
@@ -519,7 +539,7 @@ select -ne :postProcessList1;
 	setAttr -s 2 ".p";
 select -ne :defaultRenderingList1;
 select -ne :initialShadingGroup;
-	setAttr -s 6 ".dsm";
+	setAttr -s 7 ".dsm";
 	setAttr ".ro" yes;
 select -ne :initialParticleSE;
 	setAttr ".ro" yes;
@@ -536,6 +556,7 @@ connectAttr "makeNurbCube1.os2" "leftnurbsCubeShape1.cr";
 connectAttr "makeNurbCube1.os3" "rightnurbsCubeShape1.cr";
 connectAttr "makeNurbCube1.os4" "frontnurbsCubeShape1.cr";
 connectAttr "makeNurbCube1.os5" "backnurbsCubeShape1.cr";
+connectAttr "makeNurbSphere1.os" "nurbsSphereShape1.cr";
 relationship "link" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
@@ -554,4 +575,5 @@ connectAttr "leftnurbsCubeShape1.iog" ":initialShadingGroup.dsm" -na;
 connectAttr "rightnurbsCubeShape1.iog" ":initialShadingGroup.dsm" -na;
 connectAttr "frontnurbsCubeShape1.iog" ":initialShadingGroup.dsm" -na;
 connectAttr "backnurbsCubeShape1.iog" ":initialShadingGroup.dsm" -na;
+connectAttr "nurbsSphereShape1.iog" ":initialShadingGroup.dsm" -na;
 // End of ThatOneFile.ma
