@@ -1,6 +1,6 @@
 //Maya ASCII 2016 scene
 //Name: SpaceShip.ma
-//Last modified: Mon, Aug 31, 2015 03:42:52 PM
+//Last modified: Mon, Aug 31, 2015 03:47:06 PM
 //Codeset: 1252
 requires maya "2016";
 currentUnit -l centimeter -a degree -t film;
